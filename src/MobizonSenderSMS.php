@@ -11,19 +11,31 @@ use ZhandosProg\MobizonSmsDriver\Exception\PhoneNumberValidationException;
 class MobizonSenderSMS implements MobizonSenderSMSInterface
 {
 
-    public function send(array $phoneNumbers, string $message): Collection
+    public function send(array|string $phoneNumber, string $message): Collection
     {
-        $validPhoneNumbers = [];
+        $validPhoneNumber = [];
 
-        foreach ($phoneNumbers as $phoneNumber) {
+        if (is_array($phoneNumber)) {
+
+            foreach ($phoneNumber as $number) {
+
+                if (!preg_match('/^77\d{9}$/', $number)) {
+                    throw new PhoneNumberValidationException('Phone number is invalid');
+                }
+
+                $validPhoneNumber[] = $phoneNumber;
+            }
+        }
+
+        if (is_string($phoneNumber)) {
 
             if (!preg_match('/^77\d{9}$/', $phoneNumber)) {
                 throw new PhoneNumberValidationException('Phone number is invalid');
             }
 
-            $validPhoneNumbers[] = $phoneNumber;
+            $validPhoneNumber[] = $phoneNumber;
         }
 
-        return Sms::via('smsmobizon')->send($message)->to([$validPhoneNumbers])->dispatch();
+        return Sms::via('smsmobizon')->send($message)->to($validPhoneNumber)->dispatch();
     }
 }
