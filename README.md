@@ -52,6 +52,7 @@ Then fill the credentials for that gateway in the `drivers` array.
         // Fill all the credentials here.
         'apiKey' => 'Your Api Key',
         'from' => 'Your Mobizon Sender ID',
+        'url' => 'Your Url Api'
     ],
     ...
 ]
