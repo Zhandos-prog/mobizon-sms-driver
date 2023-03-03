@@ -9,5 +9,5 @@ use Illuminate\Support\Collection;
 interface MobizonSenderSMSInterface
 {
 
-    public function send(array $phoneNumbers, string $message): Collection;
+    public function send(array|string $phoneNumbers, string $message): Collection;
 }
