@@ -24,19 +24,21 @@ class MobizonDriver extends Driver
         $response = collect();
 
         foreach ($this->recipients as $recipient) {
-            $this->httpClient->request(
+            $result = $this->httpClient->request(
                 'POST',
                 $this->settings['url'].'service/message/sendsmsmessage',
                 [
                     'query'=>[
                         'apiKey' => $this->settings['apiKey']
                     ],
-                    $this->payload($recipient),
+                    'form_params' => $this->payload($recipient),
                 ],
             );
+
+            $response->put($recipient, $result);
         }
 
-        return (count($this->recipients) == 1) ? $response->first() : $response;
+        return $response;
     }
 
     private function payload(string $recipient): array
