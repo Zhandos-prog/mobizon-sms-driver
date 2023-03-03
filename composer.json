@@ -1,0 +1,36 @@
+{
+    "name": "zhandos-prog/mobizon-sms-driver",
+    "description": "Mobizon SMS driver package for tzsk/sms",
+    "keywords": [
+        "Mobizon",
+        "Mobizon SMS Provider",
+        "sms",
+        "laravel sms driver"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ZhandosProg\\MobizonSmsDriver\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZhandosProg\\MobizonSmsDriver\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Zhandos-prog",
+            "email": "sutemgenov.zhandos@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "tzsk/sms": "^6.0|^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
